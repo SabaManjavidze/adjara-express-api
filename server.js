@@ -39,15 +39,15 @@ app.get("/slider",async (req,res)=>{
     const json = await resp.data.data
     res.send(json)
 })
-app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
-try{    const {movieId,sesNum}=req.params
-    const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
-    const resp = await axios.get(url)
-    const json = await resp.data.data
-    res.send(json)}
-    catch(err){
-        res.send(err)
-    }
+app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
+        const {movieId,sesNum}=req.params
+        const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
+        axios.get(url)
+        .then(resp=>{
+            const json = resp.data.data
+            res.send(json)
+        })
+        .catch(err=>res.send(err))
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
