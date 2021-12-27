@@ -39,23 +39,22 @@ app.get("/slider",async (req,res)=>{
     const json = await resp.data.data
     res.send(json)
 })
-app.get("/moviefiles/:movieId",(req,res)=>{
+app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
         const {movieId,sesNum}=req.params
-        const url = `${boiler}movies/${movieId}/season-files/${1}?source=adjaranet`;
-        axios.get(url,{headers:{'Content-Type': 'application/json'}})
-        .then(resp=>{
-            const json = resp.data.data
-            res.send(json)
-        })
+        const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
+        const resp = await axios.get(url,{headers:{'Content-Type': 'application/json'}})
+        const json = resp.data.data
+        res.send(json)
+
         .catch(err=>res.send(err))
 })
-// app.get("/movie/:movieId",async (req,res)=>{
-//     const {movieId}=req.params
-//     const url = `${boiler}movies/${movieId}?filters%5Bwith_directors%5D=3&filters%5Bcustom_vast_zone%5D=no&source=adjaranet`;
-//     const resp = await axios.get(url)
-//     const json = await resp.data.data
-//     res.send(json)
-// })
+app.get("/movie/:movieId",async (req,res)=>{
+    const {movieId}=req.params
+    const url = `${boiler}movies/${movieId}?filters%5Bwith_directors%5D=3&filters%5Bcustom_vast_zone%5D=no&source=adjaranet`;
+    const resp = await axios.get(url)
+    const json = await resp.data.data
+    res.send(json)
+})
 
 const port = process.env.PORT || 4000
 app.listen(port,()=>{console.log(`app running on port ${port}`)})
