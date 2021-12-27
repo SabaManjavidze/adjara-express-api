@@ -40,11 +40,14 @@ app.get("/slider",async (req,res)=>{
     res.send(json)
 })
 app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
-    const {movieId,sesNum}=req.params
+try{    const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
     const resp = await axios.get(url)
     const json = await resp.data.data
-    res.send(json)
+    res.send(json)}
+    catch(err){
+        console.log(err)
+    }
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
