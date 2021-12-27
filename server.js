@@ -42,7 +42,7 @@ app.get("/slider",async (req,res)=>{
 app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
         const {movieId,sesNum}=req.params
         const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
-        axios.get(url)
+        axios.get(url,{headers:{'Content-Type': 'application/json'}})
         .then(resp=>{
             const json = resp.data.data
             res.send(json)
