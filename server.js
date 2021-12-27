@@ -46,7 +46,7 @@ try{    const {movieId,sesNum}=req.params
     const json = await resp.data.data
     res.send(json)}
     catch(err){
-        console.log(err)
+        res.send(err)
     }
 })
 app.get("/movie/:movieId",async (req,res)=>{
