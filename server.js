@@ -1,6 +1,5 @@
 const express = require("express")
 const axios = require("axios").default
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 
 const app = express()
@@ -40,7 +39,7 @@ app.get("/slider",async (req,res)=>{
     const json = await resp.data.data
     res.send(json)
 })
-app.get("/movie-files/:movieId/:sesNum",async (req,res)=>{
+app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
     const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
     const resp = await axios.get(url)
