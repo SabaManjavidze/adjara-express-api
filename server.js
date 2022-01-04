@@ -39,11 +39,10 @@ app.get("/slider",async (req,res)=>{
     const json = await resp.data.data
     res.send(json)
 })
-app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
+app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
     const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
-    try {
-        const resp = await axios.get(url,{headers:
+        axios.get(url,{headers:
             {
                 'accept': 'application/json',
                 "sec-fetch-dest": "empty",
@@ -53,12 +52,8 @@ app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
                 "x-source": "adjaranet"
             }
         })
-        const json = resp.data.data
-        console.log(resp)
-        console.log(json)
-    } catch (error) {
-        res.send(error)
-    }
+        .then(response=>res.send(response))
+        .catch(error=>res.send(error))
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
