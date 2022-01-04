@@ -43,7 +43,7 @@ app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
     const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
     fetch(url)
-    .then(response=>response.json())
+    .then(response=>response.text())
     .then(json=>res.send(json))
     .catch(err=>res.send(err))
 })
