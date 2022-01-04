@@ -42,17 +42,22 @@ app.get("/slider",async (req,res)=>{
 app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
     const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
-    const resp = await axios.get(url,{headers:
-        {
-            'accept': 'application/json',
-            "sec-fetch-dest": "document",
-            "sec-fetch-mode": "navigate",
-            "sec-fetch-site": "none",
-            "sec-fetch-user": "?1",
-            "x-source": "adjaranet"
-        },mode:"no-cors"})
-    const json = resp.data.data
-    res.send(json)
+    try {
+        const resp = await axios.get(url,{headers:
+            {
+                'accept': 'application/json',
+                "sec-fetch-dest": "document",
+                "sec-fetch-mode": "navigate",
+                "sec-fetch-site": "none",
+                "sec-fetch-user": "?1",
+                "x-source": "adjaranet"
+            }
+        })
+        const json = resp.data.data
+        res.send(json)
+    } catch (error) {
+        res.send(error)
+    }
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
