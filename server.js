@@ -13,13 +13,13 @@ const Slider_url = `movies/featured?source=adjaranet`
 const top_tv_shows_by_period=`movies/top?type=series&period=month&page=1&per_page=20&filters%5Bwith_actors%5D=3&filters%5Bwith_directors%5D=1&source=adjaranet`
 const top_movies_by_period = `movies/top?type=movie&period=month&page=1&per_page=20&filters%5Bwith_actors%5D=3&filters%5Bwith_directors%5D=1&source=adjaranet`
 
-app.use(
-    cors({
-        credentials: true,
-        origin: true
-    })
-);
-app.options('*', cors());
+// app.use(
+//     cors({
+//         credentials: true,
+//         origin: true
+//     })
+// );
+// app.options('*', cors());
 
 app.get("/",async (req,res)=>{
     res.json({welcome:"hello bich"})
@@ -45,8 +45,6 @@ app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
         const resp = await axios.get(url,{headers:{'Content-Type': 'application/json'}})
         const json = resp.data.data
         res.send(json)
-
-        .catch(err=>res.send(err))
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
