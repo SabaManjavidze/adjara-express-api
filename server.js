@@ -46,15 +46,16 @@ app.get("/moviefiles/:movieId/:sesNum",async (req,res)=>{
         const resp = await axios.get(url,{headers:
             {
                 'accept': 'application/json',
-                "sec-fetch-dest": "document",
-                "sec-fetch-mode": "navigate",
-                "sec-fetch-site": "none",
-                "sec-fetch-user": "?1",
+                "sec-fetch-dest": "empty",
+                "sec-fetch-mode": "no-cors",
+                "sec-fetch-site": "same-site",
+                "referer": "https://www.adjaranet.com/",
                 "x-source": "adjaranet"
             }
         })
         const json = resp.data.data
-        res.send(json)
+        console.log(resp)
+        console.log(json)
     } catch (error) {
         res.send(error)
     }
