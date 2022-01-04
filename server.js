@@ -44,10 +44,7 @@ app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
         axios.get(url,{headers:
             {
-                'accept': 'application/json',
-                "sec-fetch-dest": "empty",
                 "sec-fetch-mode": "no-cors",
-                "sec-fetch-site": "same-site",
                 "referer": "https://www.adjaranet.com/",
                 "x-source": "adjaranet"
             }
