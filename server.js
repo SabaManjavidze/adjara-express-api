@@ -3,7 +3,7 @@ const axios = require("axios").default
 
 
 const app = express()
-
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const cors = require("cors")
 
 const boiler = "https://api.adjaranet.com/api/v1/"
@@ -42,15 +42,10 @@ app.get("/slider",async (req,res)=>{
 app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
     const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
-        axios.get(url,{headers:
-            {
-                "sec-fetch-mode": "no-cors",
-                "referer": "https://www.adjaranet.com/",
-                "x-source": "adjaranet"
-            }
-        })
-        .then(response=>res.send(response))
-        .catch(error=>res.send(error))
+    fetch(url)
+    .then(response=>response.json())
+    .then(json=>res.send(json))
+    .catch(err=>res.send(err))
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
