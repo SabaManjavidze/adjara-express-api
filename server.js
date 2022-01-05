@@ -42,10 +42,20 @@ app.get("/slider",async (req,res)=>{
 app.get("/moviefiles/:movieId/:sesNum",(req,res)=>{
     const {movieId,sesNum}=req.params
     const url = `${boiler}movies/${movieId}/season-files/${sesNum}?source=adjaranet`;
-    fetch(url)
-    .then(response=>response.text())
-    .then(json=>res.send(json))
-    .catch(err=>res.send(err))
+    var config = {
+      method: 'get',
+      url: url,
+      headers: { }
+    };
+    
+    axios(config)
+    .then(function (response) {
+      res.send(response.data);
+    })
+    .catch(function (error) {
+      res.send(error);
+    });
+    
 })
 app.get("/movie/:movieId",async (req,res)=>{
     const {movieId}=req.params
